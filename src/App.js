@@ -1,10 +1,25 @@
+import { Routes, Route } from "react-router-dom";
+
+import Home from "./routes/home/Home";
+import Navigation from "./routes/navigation/Navigation";
+
 import "./categories.styles.scss";
-import Directory from "./components/directory/Directory";
+import SignIn from "./routes/sign-in/SignIn";
+
+const Shop = () => {
+  return <h1>Shop</h1>;
+};
 
 const App = () => {
   return (
     <>
-      <Directory />
+      <Routes>
+        <Route path="/" element={<Navigation />}>
+          <Route index element={<Home />} />
+          <Route path="shop" element={<Shop />} />
+          <Route path="sign-in" element={<SignIn />} />
+        </Route>
+      </Routes>
     </>
   );
 };
