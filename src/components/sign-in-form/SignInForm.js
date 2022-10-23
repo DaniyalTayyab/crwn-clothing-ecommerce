@@ -1,18 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+
 import Button from "../button/Button";
 import FormInput from "../formInput/FormInput";
+
+import { UserContext } from "../../contexts/userContext";
 
 import "./SignInForm.styles.scss";
 
 const defaultFields = {
-  email: "",
+  userName: "",
   password: "",
 };
 
 const SignInForm = () => {
   const [formFields, setFormFields] = useState(defaultFields);
+  const { userName, password } = formFields;
 
-  const { email, password } = formFields;
+  const { setCurrentUser } = useContext(UserContext);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -21,7 +25,7 @@ const SignInForm = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    alert("Form submitted");
+    setCurrentUser(formFields);
     resetFormFields();
   };
 
@@ -35,12 +39,12 @@ const SignInForm = () => {
       <span>Sign up with your email and password</span>
       <form onSubmit={handleSubmit}>
         <FormInput
-          label="Email"
-          type="email"
+          label="User Name"
+          type="text"
           required
           onChange={handleChange}
-          name="email"
-          value={email}
+          name="userName"
+          value={userName}
         />
         <FormInput
           label="Password"

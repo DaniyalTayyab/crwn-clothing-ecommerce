@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+
+import { UserContext } from "../../contexts/userContext";
+
 import Button from "../button/Button";
 import FormInput from "../formInput/FormInput";
 
 import "./SignUpForm.styles.scss";
 
 const defaultFormFields = {
-  displayName: "",
+  userName: "",
   email: "",
   password: "",
   confirmPassword: "",
@@ -15,7 +18,9 @@ const SignUpForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
 
   //here we destructre these form fields
-  const { displayName, email, password, confirmPassword } = formFields;
+  const { userName, email, password, confirmPassword } = formFields;
+
+  const { setCurrentUser } = useContext(UserContext);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -24,7 +29,7 @@ const SignUpForm = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    alert("Form Submitted");
+    setCurrentUser(formFields);
     resetFormFields();
   };
 
@@ -36,12 +41,12 @@ const SignUpForm = () => {
       <span>Sign up with your email and password</span>
       <form onSubmit={handleSubmit}>
         <FormInput
-          label="Display Name"
+          label="User Name"
           type="text"
           required
           onChange={handleChange}
-          name="displayName"
-          value={displayName}
+          name="userName"
+          value={userName}
         />
         <FormInput
           label="Email"
