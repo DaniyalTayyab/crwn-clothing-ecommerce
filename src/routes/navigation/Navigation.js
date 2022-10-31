@@ -16,8 +16,6 @@ const Navigation = () => {
 
   const handleSignOut = () => setCurrentUser(null);
 
-  console.log(isCartOpen);
-
   return (
     <Fragment>
       <div className="navigation">
