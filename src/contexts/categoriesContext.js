@@ -1,4 +1,5 @@
-import { createContext, useEffect, useReducer, useState } from "react";
+import { createContext, useEffect, useReducer } from "react";
+import { createAction } from "../utils/reducers/reducer.utils.js";
 
 import SHOP_DATA from "../utils/shopData.js";
 
@@ -45,10 +46,9 @@ export const CategoriesProvider = ({ children }) => {
   );
 
   const setCategoriesMap = () => {
-    dispatch({
-      type: CATEGORY_ACTION_TYPES.SET_CATEGORY_MAP,
-      payload: getCategoriesMap(),
-    });
+    dispatch(
+      createAction(CATEGORY_ACTION_TYPES.SET_CATEGORY_MAP, getCategoriesMap())
+    );
   };
 
   useEffect(() => {
