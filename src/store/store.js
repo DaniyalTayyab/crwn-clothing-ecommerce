@@ -1,11 +1,34 @@
-import { compose, createStore, applyMiddleware } from "redux";
-import logger from "redux-logger";
+import { createStore, compose, applyMiddleware } from "redux";
+// import logger from "redux-logger";
 
 import { rootReducer } from "./root-reducer";
 
-const middleWares = [logger];
+// currying function, a function that returns us another function.
+/*
+    const curryFun = (a) => (b, c) => {
+        return a + b - c;
+    }
 
-const composedEnhancers = compose(applyMiddleware(...middleWares));
+    const with3 = curryFun(3);
+    with3(5, 7);
+*/
 
-// root-reducer
+const loggerMiddleware = (store) => (next) => (action) => {
+  if (!action.type) {
+    return next(action);
+  }
+
+  console.log("type: ", action.type);
+  console.log("payload: ", action.payload);
+  console.log("currnetState: ", store.getState());
+
+  next(action);
+
+  console.log("next state: ", store.getState());
+};
+
+const middlewares = [loggerMiddleware];
+
+const composedEnhancers = compose(applyMiddleware(...middlewares));
+
 export const store = createStore(rootReducer, undefined, composedEnhancers);

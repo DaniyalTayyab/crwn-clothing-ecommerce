@@ -1,9 +1,10 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
+
+import { useDispatch } from "react-redux";
+import { setCurrentUser } from "../../store/user/user.action";
 
 import Button from "../button/Button";
 import FormInput from "../formInput/FormInput";
-
-import { UserContext } from "../../contexts/userContext";
 
 import "./SignInForm.styles.scss";
 
@@ -13,10 +14,10 @@ const defaultFields = {
 };
 
 const SignInForm = () => {
+  const dispatch = useDispatch();
+
   const [formFields, setFormFields] = useState(defaultFields);
   const { userName, password } = formFields;
-
-  const { setCurrentUser } = useContext(UserContext);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -25,7 +26,7 @@ const SignInForm = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setCurrentUser(formFields);
+    dispatch(setCurrentUser(formFields));
     resetFormFields();
   };
 

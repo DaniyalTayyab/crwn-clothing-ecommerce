@@ -20,7 +20,7 @@ const SignUpForm = () => {
   //here we destructre these form fields
   const { userName, email, password, confirmPassword } = formFields;
 
-  const { setCurrentUser } = useContext(UserContext);
+  // const { setCurrentUser } = useContext(UserContext);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -29,7 +29,7 @@ const SignUpForm = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setCurrentUser(formFields);
+    // setCurrentUser(formFields);
     resetFormFields();
   };
 

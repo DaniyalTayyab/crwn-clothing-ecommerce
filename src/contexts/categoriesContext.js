@@ -39,7 +39,7 @@ const categoryReducer = (state, action) => {
 };
 
 export const CategoriesProvider = ({ children }) => {
-  // const [categoriesMap, setCategoriesMap] = useState({});
+s
   const [{ categoriesMap }, dispatch] = useReducer(
     categoryReducer,
     INITAL_STATE

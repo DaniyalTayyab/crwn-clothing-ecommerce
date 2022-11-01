@@ -2,8 +2,10 @@ import React, { Fragment, useContext } from "react";
 
 import { Outlet, Link } from "react-router-dom";
 
-import { UserContext } from "../../contexts/userContext";
 import { CartContext } from "../../contexts/cartContext";
+
+import { useSelector } from "react-redux";
+import { selectCurrentUser } from "../../store/user/user.selctor";
 
 import { ReactComponent as CrwnLogo } from "../../assets/crown.svg";
 import "./Navigation.styles.scss";
@@ -11,10 +13,8 @@ import CartIcon from "../../components/cart-icon/CartIcon";
 import CartDropDown from "../../components/cart-dropdown/CartDropDown";
 
 const Navigation = () => {
-  const { currentUser, setCurrentUser } = useContext(UserContext);
   const { isCartOpen } = useContext(CartContext);
-
-  const handleSignOut = () => setCurrentUser(null);
+  const currentUser = useSelector(selectCurrentUser);
 
   return (
     <Fragment>
@@ -27,9 +27,7 @@ const Navigation = () => {
             SHOP
           </Link>
           {currentUser ? (
-            <span className="nav-link" onClick={handleSignOut}>
-              Sign Out
-            </span>
+            <span className="nav-link">Sign Out</span>
           ) : (
             <Link to="/auth" className="nav-link">
               SIGN IN
